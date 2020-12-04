@@ -1,0 +1,46 @@
+#movies img,
+#movie img {
+  width: 100%;
+}
+
+/* @media(min-width:960px) {
+  #movies .col-md-3 .well {
+    height: 390px;
+  }
+
+  #movies .col-md-3 img {
+    height: 240px;
+  }
+
+} */
+
+#texter {
+  display: none;
+}
+
+#movie_id {
+  display: none;
+}
+
+.unique-movie-size {
+  margin: 0 auto;
+}
+
+/* Creative card will be here */
+.creative-card {
+  /* border: 5px solid red; */
+  min-height: 300px;
+  /* width: 360px; */
+  border-radius: 20px;
+}
+
+
+.movies-for-ya {
+  margin: 0 auto;
+  width: 50%;
+}
+
+
+body {
+  background: black;
+}

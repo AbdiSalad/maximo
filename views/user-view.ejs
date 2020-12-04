@@ -1,0 +1,148 @@
+<div class="container">
+  <!-- This is the nav -->
+  <ul id="navbar" class="navbar transparent navbar-inverse">
+    <li class="navbar transparent navbar-inverse">
+      <a style="color: white;" href="/Profile">User: <%=username%></a>
+    </li>
+
+    <div class="d-flex flex-row align-items-center">
+      <form action="/Profile" method="POST">
+        <input
+          style="display: none"
+          type="text"
+          name="contributing_user"
+          value="contributing_user"
+        />
+        <button type="submit" class="btn btn-success">Contribute</button>
+      </form>
+
+      <li class="nav-item">
+        <a class="nav-link" href="/Logout">Logout</a>
+      </li>
+    </div>
+  </ul>
+
+  <!-- THIS IS YOUR JOB MUAADH. MAKE THIS LOOK NICE -->
+  <!-- We add stuff here -->
+  <div class="text-center my-4">
+    <div class="text-center">
+      <h1 style="color: teal;"><%= foundUser.username %></h1>
+
+      <form action="/users" method="POST">
+        <button type="submit" class="btn btn-outline-success">
+          <%= follow %>
+        </button>
+
+        <% if (follow === 'follow') {%>
+
+        <input style="display: none" type="text" name="follow" value="follow" />
+
+        <% } else { %>
+
+        <input
+          style="display: none"
+          type="text"
+          name="follow"
+          value="unfollow"
+        />
+
+        <% }%>
+      </form>
+    </div>
+  </div>
+
+  <!-- Person user stuff -->
+
+  <div class="row text-center">
+    <div class="col-lg-4">
+      <div class="creative-card bg-primary text-white middle">
+        <h2>Followed</h2>
+
+        <ul class="list-group middle">
+          <% for (var i=0; i < foundUser.following.length; i++) { %>
+          <form action="/users" id="my_form">
+            <input
+              style="display: none"
+              type="text"
+              name="search"
+              id="search"
+              value=<%=foundUser.following[i]%>
+            />
+            <button id="search-link" class="list-group-item list-group-item-action list-group-item-light"><%=foundUser.following[i]%></button>
+          </form>
+
+          <% } %>
+        </ul>
+      </div>
+    </div>
+
+    <div class="col-lg-4">
+      <div class="creative-card bg-primary text-white middle">
+        <h4>Movie Ratings</h4>
+
+            <!-- Here we loop over the movie ratings made by this user. -->
+            <ul class="list-group ">
+              <% for (var i=0; i < foundUser.ratings.length; i++) { %>
+              <form action="/movies/:" id="my_form">
+
+                <!-- This is hidden from the users view -->
+                <input
+                  style="display: none"
+                  type="text"
+                  name="movie_id"
+                  id="movie_id"
+                  value=<%=foundUser.ratings[i].id%>
+                />
+
+
+                <div class="  bg-light  text-center">
+                  <button type="submit" id="search-link">Movie title: <%=foundUser.ratings[i].title%></button>
+                  <br>
+                  <div class="row justify-content-center">
+                    <img src="/images/star.png" width="25" height="25" />
+                    <p class="text-muted colour"> &nbsp;<%=foundUser.ratings[i].rating%> / 5</p>
+                  </div>
+
+                </div>
+
+
+              </form>
+
+              <% } %>
+            </ul>
+      </div>
+    </div>
+    <div class="col-lg-4">
+      <div class="creative-card bg-primary text-white middle">
+        <h4>Movie comments</h4>
+
+            <!-- Here we loop over the movie comments made by this user. -->
+            <ul class="list-group">
+              <% for (var i=0; i < foundUser.comments.length; i++) { %>
+              <form action="/movies/:" id="my_form">
+
+                 <!-- This is hidden from the users view -->
+                <input
+                  style="display: none"
+                  type="text"
+                  name="movie_id"
+                  id="movie_id"
+                  value=<%=foundUser.comments[i].id%>
+                />
+
+
+                <div class="bg-light">
+
+                  <button type="submit" class="search-link">Movie title: <%=foundUser.comments[i].title%></button>
+                  <p class="text-muted"> &nbsp;&nbsp;<%=foundUser.comments[i].comment%></p>
+                </div>
+
+
+              </form>
+
+              <% } %>
+            </ul>
+      </div>
+    </div>
+  </div>
+</div>

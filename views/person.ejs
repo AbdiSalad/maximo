@@ -1,0 +1,75 @@
+<ul style="display: none">
+  <!-- You won't be able to see this stuff-->
+  <li id="name"><%= name %></li>
+</ul>
+
+<div class="container">
+  <!-- This is the nav -->
+  <ul class="navbar transparent navbar-inverse">
+    <li class="navbar transparent navbar-inverse">
+      <a style="color: white;" href="/Profile">User: <%=username%></a>
+    </li>
+
+    <div class="d-flex flex-row align-items-center">
+      <form action="/Profile" method="POST">
+        <input
+          style="display: none"
+          type="text"
+          name="contributing_user"
+          value="contributing_user"
+        />
+        <button type="submit" class="btn btn-success">Contribute</button>
+      </form>
+
+      <li class="nav-item">
+        <a class="nav-link" href="/Logout">Logout</a>
+      </li>
+    </div>
+  </ul>
+
+  <!-- We add stuff here -->
+  <div class="text-center my-4">
+    <div class="text-center white">
+      <h1><%= name %></h1>
+
+      <form action="/People" method="POST">
+        <button type="submit" class="btn btn-outline-success">
+          <%= follow %>
+        </button>
+
+        <% if (follow === 'follow') {%>
+
+        <input style="display: none" type="text" name="follow" value="follow" />
+
+        <% } else { %>
+
+        <input
+          style="display: none"
+          type="text"
+          name="follow"
+          value="unfollow"
+        />
+
+        <% }%>
+      </form>
+    </div>
+  </div>
+</div>
+
+<div class="container">
+  <h1 class="lead white">Movies <%= name %> was in</h1>
+  <div id="movies" class="row">
+    <!-- Output will be populated over here depending on differen't stuff -->
+  </div>
+</div>
+
+<div class="container">
+  <h1>People this guy worked with a ton</h1>
+  <div id="people-worked" class="row">
+    <!-- Output will be populated over here depending on differen't stuff -->
+  </div>
+</div>
+
+<script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+<script src="/js/person-movies.js"></script>
+<script src="/js/person-collab.js"></script>

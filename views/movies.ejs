@@ -1,0 +1,40 @@
+<div class="container">
+
+<!-- This is the nav -->
+  <ul class="navbar transparent navbar-inverse">
+    <li class="navbar transparent navbar-inverse">
+      <a style="color: white;" href="/Profile">User: <%=userOnline.username%></a>
+    </li>
+
+    <div class="d-flex flex-row align-items-center">
+      <form action="/Profile" method="POST">
+        <input
+          style="display: none"
+          type="text"
+          name="contributing_user"
+          value="contributing_user"
+        />
+        <button type="submit" class="btn btn-success">Contribute</button>
+      </form>
+
+      <li class="nav-item">
+        <a class="nav-link" href="/Logout">Logout</a>
+      </li>
+    </div>
+  </ul>
+
+  <ul style="display: none">
+    <!-- You won't be able to see this stuff-->
+    <li id="texter"><%= texter %></li>
+    <li id="search"><%= search %></li>
+  </ul>
+
+  <div class="container">
+    <div id="movies" class="row">
+      <!-- Output will be populated over here depending on differen't stuff -->
+    </div>
+  </div>
+
+  <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+  <script src="/js/client.js"></script>
+</div>

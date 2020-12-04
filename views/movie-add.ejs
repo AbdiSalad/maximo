@@ -1,0 +1,187 @@
+<div class="container">
+  <!-- This is the nav -->
+  <ul class="navbar transparent navbar-inverse">
+    <li class="navbar transparent navbar-inverse">
+      <a style="color: white;" href="/Profile">User: <%=username%></a>
+    </li>
+
+    <div class="nav-item">
+      <a class="nav-link" href="/Logout">Logout</a>
+    </div>
+  </ul>
+
+  <div class="add-movie-card">
+    <form action="/movies" method="POST">
+      <h1 class="text-center">Insert Movie</h1>
+      <hr />
+
+      <!-- For title -->
+      <div class="form-group">
+        <label for="Title">Title</label>
+        <input
+          type="text"
+          class="form-control"
+          id="Title"
+          name="Title"
+          placeholder="99 Homes"
+        required/>
+      </div>
+
+      <!-- For Actors -->
+      <div class="form-group">
+        <label for="Actors">Actors (Separate names with commas)</label>
+        <input
+          type="text"
+          class="form-control"
+          id="Actors"
+          name="Actors"
+          placeholder="Michael Shannon, Douglas M. Griffin, Randy Austin, Carl Palmer"
+        required/>
+      </div>
+
+      <!-- For Genres -->
+      <div class="form-group">
+        <label for="Genres">Genres (Separate genres with commas)</label>
+        <input
+          type="text"
+          class="form-control"
+          id="Genres"
+          name="Genres"
+          placeholder="Adventure, Family"
+        required/>
+      </div>
+
+      <!-- For movie language -->
+      <div class="form-group">
+        <label for="Languages"
+          >Languages (Separate languages with commas)</label
+        >
+        <input
+          type="text"
+          class="form-control"
+          id="Languages"
+          name="Languages"
+          placeholder="English"
+        required/>
+      </div>
+
+      <!-- For runtime and release year -->
+      <div class="row">
+        <div class="col-sm-6">
+          <div class="form-group">
+            <label for="Runtime">Run time</label>
+            <input
+              type="text"
+              class="form-control"
+              id="Runtime"
+              name="Runtime"
+              placeholder="119 min"
+            required/>
+          </div>
+        </div>
+
+        <div class="col-sm-6">
+          <div class="form-group">
+            <label for="releaseyear">Relase Year</label>
+            <input
+              type="text"
+              class="form-control"
+              id="releaseyear"
+              name="releaseyear"
+              placeholder="2017"
+            required/>
+          </div>
+        </div>
+      </div>
+
+      <!-- For Director and Movie rating -->
+      <div class="">
+        <div class="form-group">
+          <label for="dir">Director</label>
+          <input
+            type="text"
+            class="form-control"
+            id="dir"
+            name="dir"
+            placeholder="James Smith"
+          required/>
+        </div>
+
+        <div class="form-group">
+          <label for="Rated">Rated</label>
+          <input
+            type="text"
+            class="form-control"
+            id="Rated"
+            name="Rated"
+            placeholder="R"
+          required/>
+        </div>
+
+      <div class="form-group">
+        <label for="Plot">Plot</label>
+        <textarea
+          class="form-control"
+          id="Plot"
+          name="Plot"
+          rows="3"
+        required></textarea>
+      </div>
+
+      <!-- For adding a picture -->
+      <div class="row py-4">
+        <div class="col-lg-6 mx-auto">
+          <!-- Upload image input-->
+          <div
+            class="input-group mb-3 px-2 py-2 rounded-pill bg-white shadow-sm"
+          >
+            <input
+              id="upload"
+              type="file"
+              onchange="readURL(this);"
+              class="form-control border-0"
+              name="Image"
+            required/>
+            <label
+              id="upload-label"
+              for="upload"
+              class="font-weight-light text-muted"
+              >Choose file</label
+            >
+            <div class="input-group-append">
+              <label for="upload" class="btn btn-light m-0 rounded-pill px-4">
+                <i class="fa fa-cloud-upload mr-2 text-muted"></i
+                ><small class="text-uppercase font-weight-bold text-muted"
+                  >Choose file</small
+                ></label
+              >
+            </div>
+          </div>
+
+          <!-- Uploaded image area-->
+          <p class="font-italic text-white text-center">
+            The image uploaded will be rendered inside the box below.
+          </p>
+          <div class="image-area mt-4 text-center">
+            <img
+              id="imageResult"
+              src="#"
+              alt=""
+              class="img-fluid rounded shadow-sm mx-auto d-block"
+            />
+          </div>
+        </div>
+      </div>
+
+      <button
+        type="submit"
+        class="btn btn-success btn-lg btn-block"
+        id="add-movie-button"
+      >
+        Add Movie
+      </button>
+    </form>
+  </div>
+</div>
+
+<script src="js/show-upload.js"></script>

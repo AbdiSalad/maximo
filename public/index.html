@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <!-- Bootstrap Css Framework-->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+    <link rel="stylesheet" href="/css/styles.css">
+    <link rel="stylesheet" href="/css/register.css">
+    <link rel="stylesheet" href="/css/media.css">
+    <link rel="stylesheet" href="/css/movies.css">
+    <link rel="stylesheet" href="/css/cursor.css">
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>Maximo</title>
+    <link href="./" rel="icon">
+
+  </head>
+  <body>
+    <!-- <canvas id="space"></canvas> -->
+    <div id="root"></div>
+
+    <div class="content container-lg no-padding-sides">
+
+      <header class="middle tweek">
+        <nav class="nav d-flex flex-row  tweek justify-content-between">
+          <div>
+            <button class="custom-btn btn-3 logo-button" id="maximo-button" ><span>Maximo</span></button>
+          </div>
+          <div>
+            <a href="/Register" class="btn btn-success">Register</a>
+          </div>
+        </nav>
+      </header>
+
+
+        <div class="container">
+          <div id="movies" class="row"></div>
+        </div>
+
+        <div class="sign-stuff">
+          <div class="container">
+            <div class="row">
+              <div class="col-sm-9 col-md-7 col-lg-5 mx-auto">
+                <div class="middle card card-signin my-5">
+                  <div class="card-body tweek">
+                    <h5 class="card-title text-center">Sign In</h5>
+
+                    <!-- Make sure this works -->
+                      <form action="/Login" method="POST" class="form-signin">
+                        <div class="form-label-group">
+                          <input type="username" id="username" name="username" class="form-control" placeholder="Username" required autofocus>
+                        </div>
+
+                        <div class="form-label-group">
+                          <input type="password" id="password" name="password" class="form-control" placeholder="Password" required>
+                        </div>
+
+                        <button type="submit" class="btn btn-primary btn-lg btn-block circle-button">Login</button>
+                        <hr class="my-4">
+                        <a href="/Register" class="btn btn-success btn-lg btn-block">Sign up</a>
+                      </form>
+
+
+                      <!-- <a type="button" href="/Reset-Password" class="btn btn-link">Forgot Password?</a> -->
+                   </div>
+                </div>
+              </div>
+             </div>
+            </div>
+          </div>
+
+
+
+    </div>
+
+
+
+    <footer class="footer container-lg no-padding-sides">
+      <div class="element-footer">
+                <hr class="my-4">
+      </div>
+      <div class="element-footer">
+          <button class="custom-btn btn-3 logo-button one" id="maximo-button"><span>Maximo</span></button>
+      </div>
+
+      <div class="element-footer">
+          <small style="color: white;" class="two">Copyright © 2020 Maximo Inc. All rights reserved.</small>
+      </div>
+    </footer>
+
+
+
+
+
+
+
+
+    <!-- Jquery & PopperJs -->
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+    <!-- <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script> -->
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
+
+    <!-- BootStrap JavaScript -->
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js" integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV" crossorigin="anonymous"></script>
+
+
+
+    <!-- Load React. -->
+    <!-- Note: when deploying, replace "development.js" with "production.min.js". -->
+    <script src="https://unpkg.com/react@17/umd/react.development.js" crossorigin></script>
+    <script src="https://unpkg.com/react-dom@17/umd/react-dom.development.js" crossorigin></script>
+
+    <!-- babel -->
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+
+    <!-- Load our React component. -->
+    <script type="text/babel" src="/js/react.js"></script>
+
+    <script src="/js/test.js"></script>
+    <script src="/js/main.js"></script>
+    <script src="/js/movie-search.js"></script>
+    <script src="app.js"></script>
+
+    </script>
+  </body>
+
+</html>

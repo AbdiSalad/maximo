@@ -1,0 +1,186 @@
+
+<div class="container">
+  <!-- This is the nav -->
+  <ul class="navbar transparent navbar-inverse">
+    <li class="navbar transparent navbar-inverse">
+      <a style="color: white;" href="/Profile">User: <%=username%></a>
+    </li>
+
+    <div class="d-flex flex-row align-items-center">
+      <form action="/Profile" method="POST">
+        <input
+          style="display: none"
+          type="text"
+          name="contributing_user"
+          value="contributing_user"
+        />
+        <button type="submit" class="btn btn-success">Contribute</button>
+      </form>
+
+      <li class="nav-item">
+        <a class="nav-link" href="/Logout">Logout</a>
+      </li>
+    </div>
+  </ul>
+
+  <div class="my-4 row d-flex justify-content-center">
+    <div style="">
+      <form
+        action="/movies"
+        name="search-theme-form"
+        id="search-theme-form"
+        class="form-search text-center form-search-bigger"
+      >
+        <div class="form-group search-stuff">
+          <div class="input-group mb-3">
+            <div class="input-group-prepend">
+              <button
+                id="dropdown-button"
+                class="btn btn-outline-secondary dropdown-toggle"
+                type="button"
+                data-toggle="dropdown"
+                aria-haspopup="true"
+                aria-expanded="false"
+              >
+                Title
+              </button>
+              <div class="dropdown-menu">
+                <a class="dropdown-item" href="#" onclick="changeToTitle()"
+                  >Title</a
+                >
+                <a class="dropdown-item" href="#" onclick="changeToGenre()"
+                  >Genre</a
+                >
+                <a class="dropdown-item" href="#" onclick="changeToYear()"
+                  >Year</a
+                >
+                <a class="dropdown-item" href="#" onclick="changeToMinRating()"
+                  >Minrating (0-5)</a
+                >
+                <a class="dropdown-item" href="#" onclick="changeToPeople()"
+                  >People</a
+                >
+                <a class="dropdown-item" href="#" onclick="changeToUsers()"
+                  >Users</a
+                >
+              </div>
+            </div>
+            <input
+              type="text"
+              type="text"
+              id="texter"
+              name="texter"
+              value="Title"
+            />
+            <input
+              id="searchTextBetter"
+              name="search"
+              type="text"
+              class="form-control"
+              aria-label="Text input with dropdown button"
+              placeholder="Search..."
+            />
+          </div>
+          <button type="submit" class="btn btn-primary search-button">
+            Submit
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <div class="row text-center">
+    <div class="col-md-4">
+      <div class="creative-card bg-primary text-white">
+        <h2>Following</h2>
+
+        <ul class="list-group middle">
+          <% for (var i=0; i < following.length; i++) { %>
+          <form action="/users" id="my_form1">
+           <input
+            style="display: none;"
+              type="text"
+              type="text"
+              id="texter"
+              name="texter"
+              value="User"
+            />
+            <input
+              style="display: none"
+              type="text"
+              name="search"
+              id="search"
+              value=<%=following[i]%>
+            />
+            
+            <button id="search-link" class="list-group-item list-group-item-action list-group-item-light" type="submit"><%= following[i] %></button>
+          </form>
+
+          <% } %>
+        </ul>
+      </div>
+    </div>
+    <div class="col-md-4">
+      <div class="creative-card bg-info text-white">
+        <h2>Followers</h2>
+        <ul class="list-group">
+          <% for (var i=0; i < followers.length; i++) { %>
+          <form action="/users" id="my_form2">
+            <input
+              style="display: none"
+              type="text"
+              name="search"
+              id="search"
+              value='<%=followers[i]%>'
+            />
+
+            <button id="search-link" class="list-group-item list-group-item-action list-group-item-light" type="submit"><%= followers[i] %></button>
+          </form>
+
+          <% } %>
+        </ul>
+      </div>
+    </div>
+    <div class="col-md-4">
+      <div class="creative-card bg-success text-white">
+        <h2>People Following</h2>
+
+        <ul class="list-group">
+          <% for (var i=0; i < peopleFollowing.length; i++) { %>
+          <form action="/People" id="my_form3">
+            <input
+              style="display: none"
+              type="text"
+              name="texter"
+              id="texter"
+              value="People"
+            />
+
+            <input
+              style="display: none"
+              type="text"
+              name="search"
+              id="search"
+              value='<%=peopleFollowing[i]%>'
+            />
+
+            <button id="search-link" class="list-group-item list-group-item-action list-group-item-light" type="submit"><%=peopleFollowing[i]%> </button>
+          </form>
+
+          <% } %>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <div class="text-center my-4 movies-for-ya white">
+    <h3 class="lead white">Movies for you</h3>
+    <div id="movies" class="row">
+
+    </div>
+  </div>
+</div>
+
+
+
+<script src="js/movies-recommended.js"></script
