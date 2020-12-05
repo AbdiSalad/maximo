@@ -92,17 +92,21 @@ fetch(`../json/movie-data.json`)
     let rating;
 
     // Add to the comments
-    if (comments.length < 1) {
-      comments += '<h3>Be the first to comment now!</h3>'
-    } else { 
-      for (let i = 0; i < desiredObject.Comments.length; i++) {
-        comments += "<p>";
-        comments += desiredObject.Comments[i];
-        comments += "</p>";
-      }
+    // if (comments.length < 1) {
+    //   comments += '<h3>Be the first to comment now!</h3>'
+    // } else { 
+    //   for (let i = 0; i < desiredObject.Comments.length; i++) {
+    //     comments += "<p>";
+    //     comments += desiredObject.Comments[i];
+    //     comments += "</p>";
+    //   }
+    // }
+    for (let i = 0; i < desiredObject.Comments.length; i++) {
+      comments += "<p>";
+      comments += desiredObject.Comments[i];
+      comments += "</p>";
     }
-
-    
+  
 
     if (desiredObject.Ratings.length < 1) {
       rating = 0;
@@ -127,7 +131,16 @@ fetch(`../json/movie-data.json`)
 
     // For directors
     let directorHtml = '<div>';
-    directorHtml += "<span>Director(s): </span>"
+    directorHtml += `  <a class="btn btn-primary" data-toggle="collapse" href="#collapseDirectors" role="button" aria-expanded="false" aria-controls="collapseExample">
+    Director(s)/edit:
+  </a>`;    
+    directorHtml += `<div class="collapse" id="collapseDirectors">`;
+    directorHtml += `<form action="/add-director">`
+    directorHtml += `<input style="display: none;" name="id" type='text' value='${movie_id}'>`
+    directorHtml += `<input  type='text' name='name' placeholder="name" required>`
+    directorHtml += `<button type="submit">Add</button>`
+    directorHtml += `</form>`
+    directorHtml += `</div>`
     for (let i = 0; i <directorNew.length; i++) { 
       directorHtml += '<div>';
       directorHtml += `<form action="/people">
@@ -152,11 +165,18 @@ fetch(`../json/movie-data.json`)
     directorHtml += "</div>";
 
 
-    // for actors
-    let actorHtml = '';
-    actorHtml += '<div>';
-    actorHtml += "<span>Actors(s): </span>"
-        for (let i = 0; i <actorsNew.length; i++) { 
+    let actorHtml = '<div>';
+    directorHtml += `  <a class="btn btn-primary" data-toggle="collapse" href="#collapseActors" role="button" aria-expanded="false" aria-controls="collapseExample">
+    Actors(s)/edit:
+  </a>`;    
+    actorHtml += `<div class="collapse" id="collapseActors">`;
+    actorHtml += `<form action="/add-actor">`
+    actorHtml += `<input style="display: none;" name="id" type='text' value='${movie_id}'>`
+    actorHtml += `<input  type='text' name='name' placeholder="name" required>`
+    actorHtml += `<button type="submit">Add</button>`
+    actorHtml += `</form>`
+    actorHtml += `</div>`
+    for (let i = 0; i <actorsNew.length; i++) { 
       actorHtml += '<div>';
       actorHtml += `<form action="/people">
                       <input

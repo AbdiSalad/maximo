@@ -34,6 +34,10 @@ function mode(array)
     return maxEl;
 }
 
+function finished(err) {
+  console.log('Nothing to worry about')
+}
+
 //Body parser converts data into JSON format
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
@@ -320,7 +324,6 @@ app
     );
     res.redirect("/Profile");
 
-    function finished(err) {}
   });
 
 // UNIQUE MOVIE ROUTE
@@ -601,7 +604,6 @@ app
       );
       res.redirect("/Profile");
       
-      function finished(err) { }
     } else { 
       res.redirect("/Profile");
     }
@@ -625,18 +627,20 @@ app.route("/add-comment").post(urlencodedParser, (req, res) => {
 
   for (let i = 0; i < userOnline.followers.length; i++) { 
     // lets find the user.
-    User.find({ username: userOnline.followers[i] }, (err, user) => {
+    User.findOne({ username: userOnline.followers[i] }, (err, user) => {
 
-      let notificationObj = {
+      if (err) {
+        console.log('nothing to worry about')
+      } else { 
+        let notificationObj = {
         message: `${userOnline.username} commented on a movie`,
         username: `${userOnline.username}`
       }
-      let fakeUser = user[i];
 
-      fakeUser.notifications.push(notificationObj )
+        user.notifications.push(notificationObj )
 
-      fakeUser.save();
-
+        user.save();
+      }
     });
   }
 
@@ -649,8 +653,74 @@ app.route("/add-comment").post(urlencodedParser, (req, res) => {
   );
   res.redirect("/Profile");
 
-  function finished(err) {}
 });
+
+
+app.route('/add-director')
+  .get((req, res) => { 
+    if (!userOnline) {
+      res.redirect('/Login')
+    } else { 
+      let movieId = req.query.id;
+      let name = req.query.name;
+      people.push(name);
+      let currentDirectors = movies[movieId].Director;
+      
+      let newDirectors = currentDirectors.concat(`, ${name}`);
+      movies[movieId].Director = newDirectors;
+
+      // lets add the person to the json file as well.
+      peopleDataReal.push(name);
+
+      fs.writeFile(
+        "./public/json/people.json",
+        JSON.stringify(peopleDataReal, null, 2),
+        finished
+      );
+      
+      fs.writeFile(
+          "./public/json/movie-data.json",
+          JSON.stringify(movies, null, 2),
+          finished
+        );
+      res.redirect(`/movies/:?movie_id=${movieId}`);
+    
+    } 
+
+  })
+
+app.route('/add-actor')
+  .get((req, res) => { 
+    if (!userOnline) {
+      res.redirect('/Login')
+    } else { 
+      let movieId = req.query.id;
+      let name = req.query.name;
+      people.push(name);
+      let currentActors = movies[movieId].Actors;
+      
+      let newActors = currentActors.concat(`, ${name}`);
+      movies[movieId].Actors = newActors; 
+      
+    // lets add the person to the json file as well.
+      peopleDataReal.push(name);
+
+      fs.writeFile(
+        "./public/json/people.json",
+        JSON.stringify(peopleDataReal, null, 2),
+        finished
+      );
+
+      fs.writeFile(
+          "./public/json/movie-data.json",
+          JSON.stringify(movies, null, 2),
+          finished
+      );
+      res.redirect(`/movies/:?movie_id=${movieId}`);
+      
+    } 
+
+  })
 
 app.route("/rating").post(urlencodedParser, (req, res) => {
   let rating = req.body.rating;
@@ -676,17 +746,17 @@ app.route("/rating").post(urlencodedParser, (req, res) => {
 
   for (let i = 0; i < userOnline.followers.length; i++) { 
     // lets find the user.
-    User.find({ username: userOnline.followers[i] }, (err, user) => {
-
+    User.findOne({ username: userOnline.followers[i] }, (err, user) => {
+      if (err) { 
+        console.log('nothing to worry about')
+      }
       let notificationObj = {
         message: `${userOnline.username} added a movie rating`,
         username: `${userOnline.username}`
       }
-      let fakeUser = user[i];
+      user.notifications.push(notificationObj )
 
-      fakeUser.notifications.push(notificationObj )
-
-      fakeUser.save();
+      user.save();
 
     });
   }
@@ -700,7 +770,6 @@ app.route("/rating").post(urlencodedParser, (req, res) => {
   );
   res.redirect("/Profile");
 
-  function finished(err) {}
 });
 app.listen(PORT, () => {
   console.log(`Server running at http://localhost:${PORT}`);
