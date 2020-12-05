@@ -1,5 +1,6 @@
 let movie_id = $("#unique-movie-thing").html();
 
+
 // alert(texterValue);
 // alert(searchValue);
 

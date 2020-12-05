@@ -11,6 +11,28 @@ const expressLayouts = require("express-ejs-layouts");
 const { dir } = require("console");
 //const popup = require('popups');
 
+// Some function to the mind the most occuring element
+function mode(array)
+{
+    if(array.length == 0)
+        return null;
+    var modeMap = {};
+    var maxEl = array[0], maxCount = 1;
+    for(var i = 0; i < array.length; i++)
+    {
+        var el = array[i];
+        if(modeMap[el] == null)
+            modeMap[el] = 1;
+        else
+            modeMap[el]++;  
+        if(modeMap[el] > maxCount)
+        {
+            maxEl = el;
+            maxCount = modeMap[el];
+        }
+    }
+    return maxEl;
+}
 
 //Body parser converts data into JSON format
 app.use(bodyParser.json());
@@ -73,6 +95,11 @@ var userSchema = new mongoose.Schema({
       username: String
     },
   ],
+  genreLiked: [
+    {
+      type: String,
+    }
+  ]
 });
 
 // Creating Model
@@ -103,6 +130,7 @@ function insertUser(req, res) {
         user.comments = [];
         user.ratings = [];
         user.notifications = [];
+        user.genreLiked = [];
         user.save();
         // If everything goes well. new user gets added to the array. we redirect
         // the user to the login page
@@ -142,19 +170,6 @@ for (let i = 0; i < movies.length; i++) {
       people.push(directors[i]);
     }
   }
-
-  // if (!people.includes(director)) {
-  //   people.push(director);
-  // }
-
-  // I will get to this some other day. for now, actors and directors
-  // for (let i = 0; i < writers.length; i++) {
-  //   if (!people.includes(writers[i])) {
-  //     people.push(writers[i]);
-  //   }
-  // }
-
-  // console.log(people);
 }
 
 // Create application/x-www-form-urlencoded parser
@@ -302,6 +317,7 @@ app
 // UNIQUE MOVIE ROUTE
 app.route("/movies/:").get((req, res) => {
   if (userOnline != null) {
+    // now lets find the users most liked movie genre
     res.render("unique-movie", {
       userOnline: userOnline,
       movie_id: req.query.movie_id,
@@ -421,12 +437,27 @@ app
       res.redirect("/Login");
     } else {
       // console.log(userOnline);
+      // lets find the users more liked genre
+      let favouriteGenre;
+      if (userOnline.genreLiked.length === 0) {
+        favouriteGenre = "$$$";
+      } else { 
+        // lets find the favourite genre.
+        favouriteGenre = mode(userOnline.genreLiked);
+      }
       if (!userOnline.contributing_user) {
         // We go to the normal user profile page
-        res.render("normal-user", userOnline);
+        res.render("normal-user", {
+          userOnline: userOnline,
+          favouriteGenre: favouriteGenre,
+        });
       } else {
         // We go to the contributing user profile page
-        res.render("contributing-user", userOnline);
+        res.render("contributing-user", {
+            userOnline: userOnline,
+            favouriteGenre: favouriteGenre,
+          }
+        );
       }
     }
   })
@@ -541,6 +572,13 @@ app.route("/rating").post(urlencodedParser, (req, res) => {
   };
   
   userOnline.ratings.push(ratingObj);
+  if (rating >= 4) { 
+    let movieObj = movies[movieId];
+    let genres = movieObj.Genre.split(',');
+    for (let i = 0; i < genres.length; i++) { 
+      userOnline.genreLiked.push(genres[i])
+    }
+  }
   userOnline.save();
 
 

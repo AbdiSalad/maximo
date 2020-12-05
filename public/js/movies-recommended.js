@@ -1,6 +1,8 @@
 // This will display movies depending on what movie genres
 // the person has peaked interest in.
 
+let favouriteGenre = $("#unique-genre-thing").html();
+
 // returns random values in an array
 function getRandom(arr, n) {
   var result = new Array(n),
@@ -41,22 +43,63 @@ fetch(`../json/movie-data.json`)
   })
   .then((data) => {
     let output = "";
-
-    let recommendedMovies = getRandom(data, 8);
+    let recommendedMovies;
     let recommendedMoviesObject = [];
 
-    for (let i = 0; i < recommendedMovies.length; i++) {
-      for (let j = 0; j < data.length; j++) {
-        if (data[j].Title === recommendedMovies[i].Title) {
-          recommendedMoviesObject.push({
-            movie: recommendedMovies[i],
-            index: j,
-          });
+    if (favouriteGenre.includes('$$$')) {
+      // If the user doesn't have a favourite genre,
+      // he will get 8 random movies
+      recommendedMovies = getRandom(data, 8);
 
-          break;
+
+      for (let i = 0; i < recommendedMovies.length; i++) {
+        for (let j = 0; j < data.length; j++) {
+          if (data[j].Title === recommendedMovies[i].Title) {
+            recommendedMoviesObject.push({
+              movie: recommendedMovies[i],
+              index: j,
+            });
+
+            break;
+          }
         }
       }
+    } else { 
+      // lets tranverse through the data
+      let yourFavouriteGenreMovies = [];
+      for (let i = 0; i < data.length; i++) { 
+        let genreArray = data[i].Genre.split(',');
+        for (let j = 0; j < genreArray.length; j++) { 
+          if (favouriteGenre.includes(genreArray[j])) { 
+            yourFavouriteGenreMovies.push(data[i])
+            break;
+          }
+        }
+        
+      }
+      let length;
+      if (yourFavouriteGenreMovies.length < 8) {
+        length = yourFavouriteGenreMovies.length;
+      } else { 
+        length = 8;
+      }
+      recommendedMovies = getRandom(yourFavouriteGenreMovies, length);
+
+      for (let i = 0; i < recommendedMovies.length; i++) {
+        for (let j = 0; j < data.length; j++) {
+          if (data[j].Title === recommendedMovies[i].Title) {
+            recommendedMoviesObject.push({
+              movie: recommendedMovies[i],
+              index: j,
+            });
+
+            break;
+          }
+        }
+      }
+
     }
+
 
     for (let i = 0; i < recommendedMoviesObject.length; i++) {
       let averageRating = getAverageRating(recommendedMoviesObject[i].movie);

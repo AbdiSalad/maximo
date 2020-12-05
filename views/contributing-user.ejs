@@ -1,9 +1,12 @@
+<ul style="display: none;">
+  <li id="unique-genre-thing"> <%= favouriteGenre %></li>
+</ul>
 
 <div class="container">
     <!-- This is the nav -->
     <ul class="navbar transparent navbar-inverse">
       <li class="navbar transparent navbar-inverse">
-        <a style="color: white" href="/Profile">User: <%=username%></a>
+        <a style="color: white" href="/Profile">User: <%=userOnline.username%></a>
       </li>
 
       <div class="d-flex flex-row align-items-center">
@@ -101,7 +104,7 @@
       <div class="collapse" id="collapse-notifications">
         <div class="card card-body">
           <ul class="list-group middle">
-            <% for (let i=0; i < notifications.length; i++) { %>
+            <% for (let i=0; i < userOnline.notifications.length; i++) { %>
             <form action="/users" id="my_form">
               <input
                 style="display: none"
@@ -115,9 +118,9 @@
                 type="text"
                 name="search"
                 id="search"
-                value='<%= notifications[i].username %>'
+                value='<%= userOnline.notifications[i].username %>'
               />
-              <button id="search-link" class="list-group-item list-group-item-action list-group-item-light" type="submit"><%= notifications[i].message  %></button>
+              <button id="search-link" class="list-group-item list-group-item-action list-group-item-light" type="submit"><%= userOnline.notifications[i].message  %></button>
             </form>
 
             <% } %> 
@@ -133,7 +136,7 @@
         <h2>Following</h2>
 
         <ul class="list-group middle">
-          <% for (var i=0; i < following.length; i++) { %>
+          <% for (var i=0; i < userOnline.following.length; i++) { %>
           <form action="/users" id="my_form1">
            <input
             style="display: none;"
@@ -148,10 +151,10 @@
               type="text"
               name="search"
               id="search"
-              value=<%=following[i]%>
+              value=<%=userOnline.following[i]%>
             />
             
-            <button id="search-link" class="list-group-item list-group-item-action list-group-item-light" type="submit"><%= following[i] %></button>
+            <button id="search-link" class="list-group-item list-group-item-action list-group-item-light" type="submit"><%= userOnline.following[i] %></button>
           </form>
 
           <% } %>
@@ -162,17 +165,17 @@
       <div class="creative-card bg-info text-white">
         <h2>Followers</h2>
         <ul class="list-group">
-          <% for (var i=0; i < followers.length; i++) { %>
+          <% for (var i=0; i < userOnline.followers.length; i++) { %>
           <form action="/users" id="my_form2">
             <input
               style="display: none"
               type="text"
               name="search"
               id="search"
-              value='<%=followers[i]%>'
+              value='<%=userOnline.followers[i]%>'
             />
 
-            <button id="search-link" class="list-group-item list-group-item-action list-group-item-light" type="submit"><%= followers[i] %></button>
+            <button id="search-link" class="list-group-item list-group-item-action list-group-item-light" type="submit"><%= userOnline.followers[i] %></button>
           </form>
 
           <% } %>
@@ -184,7 +187,7 @@
         <h2>People Following</h2>
 
         <ul class="list-group">
-          <% for (var i=0; i < peopleFollowing.length; i++) { %>
+          <% for (var i=0; i < userOnline.peopleFollowing.length; i++) { %>
           <form action="/People" id="my_form3">
             <input
               style="display: none"
@@ -199,10 +202,10 @@
               type="text"
               name="search"
               id="search"
-              value='<%=peopleFollowing[i]%>'
+              value='<%=userOnline.peopleFollowing[i]%>'
             />
 
-            <button id="search-link" class="list-group-item list-group-item-action list-group-item-light" type="submit"><%=peopleFollowing[i]%> </button>
+            <button id="search-link" class="list-group-item list-group-item-action list-group-item-light" type="submit"><%=userOnline.peopleFollowing[i]%> </button>
           </form>
 
           <% } %>
@@ -238,5 +241,5 @@
   </div>
 
 
-  
+<script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
 <script src="js/movies-recommended.js"></script>
