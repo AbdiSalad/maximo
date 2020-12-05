@@ -1,23 +1,59 @@
 /***  THIS FILE IS FOR MEDIA QUERIES ONLY ***/
 
 /* Extra small devices (portrait phones, less than 576px) */
-@media (min-width: 300.98px) {
+@media (min-width: 100px) and (max-width: 300px) {
+  .navbar-inverse {
+    justify-content: center;
+  }
+
+  h1, h2, h3, h4, h5, h6, p, a {
+    font-size: 0.7rem;
+  } 
+
+  .contribute-stuff  a {
+    margin: 0 auto;
+  }
+
+  .add-person-card,
+  .add-movie-card
+  {
+    width: 100%;
+  }
+}
+
+@media (min-width: 250px) {
   .creative-card {
     margin: 0.5em 0;
     /* padding: 2em 0; */
   }
 
+  .element-footer small {
+    margin: 0 auto;
+  }
+
+  h1, h2, h3, h4, h5, h6, p, a {
+    font-size: 1rem;
+  } 
+  .add-person-card {
+    max-width: 400px;
+  }
+  .add-movie-card,
+  .add-person-card
+  {
+    width: 100%;
+  }
 }
 
 /* Small devices (landscape phones, 576px and up) */
 @media (min-width: 576px) and (max-width: 767.98px) {
- }
+
+}
 
 /* Medium devices (tablets, 768px and up) */
 @media (min-width: 768px) {
   .sign-stuff,
   .register {
-    margin-top: 4em;
+    margin-top: 3em;
   }
 
   .unique-movie-size {
@@ -27,7 +63,15 @@
   .form-search-bigger {
     width: 500px;
   }
+    h1, h2, h3, h4, h5, h6, p, a {
+    font-size: 1.5rem;
+  } 
 
+
+  .add-movie-card
+  {
+    width: 50%;
+  }
 }
 
 /* Large devices (desktops, 992px and up) */
@@ -39,6 +83,12 @@
 
   .unique-movie-size {
     width: 50%;
+  }
+
+  
+  .add-movie-card
+  {
+    max-width: 1000px;
   }
 }
 

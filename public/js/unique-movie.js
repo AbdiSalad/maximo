@@ -92,11 +92,17 @@ fetch(`../json/movie-data.json`)
     let rating;
 
     // Add to the comments
-    for (let i = 0; i < desiredObject.Comments.length; i++) {
-      comments += "<p>";
-      comments += desiredObject.Comments[i];
-      comments += "<p>";
+    if (comments.length < 1) {
+      comments += '<h3>Be the first to comment now!</h3>'
+    } else { 
+      for (let i = 0; i < desiredObject.Comments.length; i++) {
+        comments += "<p>";
+        comments += desiredObject.Comments[i];
+        comments += "</p>";
+      }
     }
+
+    
 
     if (desiredObject.Ratings.length < 1) {
       rating = 0;
@@ -251,7 +257,7 @@ fetch(`../json/movie-data.json`)
                       
                     </form>
 
-                    <div style="background: red;" class="">
+                    <div class="comment-box text-justify">
                       ${comments}
                     </div>
 
