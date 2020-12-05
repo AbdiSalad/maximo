@@ -5,7 +5,6 @@ const nameOutput = (dataObject, nameValue) => {
   // We return stuff;
   //   return "<h1>My name is jeff<h1>";
   for (let i = 0; i < dataObject.length; i++) {
-    // console.log('what is up')
     // Old if block "dataObject[i].Title.toUpperCase().indexOf(searchValue.toUpperCase()) != -1"
     // Second if block "dataObject[i].Title.toUpperCase().includes(searchValue.toUpperCase())"
     if (
@@ -13,11 +12,12 @@ const nameOutput = (dataObject, nameValue) => {
       dataObject[i].Actors.includes(nameValue) ||
       dataObject[i].Writer.includes(nameValue)
     ) {
-      console.log(dataObject[i]);
       output += `
             <div class="col-md-3">
               <div class="well text-center">
-                <img class="img-poster" src="${dataObject[i].Poster}">
+                <div class="responsive-image">
+                  <img src="${dataObject[i].Poster}">
+                </div>
                 <h5 style="color:yellow";>${dataObject[i].Title}</h5>
                 <a data-toggle="collapse" href="#collapseExample${i}" class="btn btn-primary" role="button" aria-expanded="false" aria-controls="collapseExample">
                   Movie Details
@@ -51,7 +51,6 @@ fetch(`../json/movie-data.json`)
     return response.json();
   })
   .then((data) => {
-    console.log(data);
     let output = "";
 
     output = nameOutput(data, nameValue);

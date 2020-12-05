@@ -1,16 +1,5 @@
 let movie_id = $("#unique-movie-thing").html();
 
-
-// alert(texterValue);
-// alert(searchValue);
-
-// Functions
-
-// Rating Initialization
-$(document).ready(function () {
-  $("#rateMe4").mdbRate();
-});
-
 /**
  * @description determine if an array contains one or more items from another array.
  * @param {array} haystack the array to search.
@@ -53,7 +42,6 @@ const addRelatedMovied = (arr) => {
   } else {
     smallerSimilarMovies = getRandom(arr, 6);
   }
-  console.log(smallerSimilarMovies);
 
   for (let i = 0; i < smallerSimilarMovies.length; i++) {
     outputVariable += `<div class="col-md-2">
@@ -70,47 +58,6 @@ const addRelatedMovied = (arr) => {
   return outputVariable;
 };
 
-const titleOutput = (dataObject, searchValue) => {
-  let output = "";
-  // We return stuff;
-  //   return "<h1>My name is jeff<h1>";
-  for (let i = 0; i < dataObject.length; i++) {
-    // console.log('what is up')
-    // Old if block "dataObject[i].Title.toUpperCase().indexOf(searchValue.toUpperCase()) != -1"
-    // Second if block "dataObject[i].Title.toUpperCase().includes(searchValue.toUpperCase())"
-    if (dataObject[i].Title.toUpperCase().includes(searchValue.toUpperCase())) {
-      console.log(dataObject[i]);
-      output += `
-            <div class="col-md-3">
-              <div class="well text-center">
-                <img src="${dataObject[i].Poster}">
-                <h5 style="color:yellow;">${dataObject[i].Title}</h5>
-                <a data-toggle="collapse" href="#collapseExample${i}" class="btn btn-primary" role="button" aria-expanded="false" aria-controls="collapseExample">
-                  Movie Details
-                </a>
-                <div class="collapse" id="collapseExample${i}">
-                  <div class="card card-body">
-                    <p>${dataObject[i].Plot}<p>
-                    <p>Maximo rating: 0<p>
-                    <p class="">Runtime: ${dataObject[i].Runtime}<p>
-                    <p class="">Release year: ${dataObject[i].Year}<p>
-                    <form action="/movies/:">
-                      <input type="text" id="movie_id" name="movie_id" value="${i}">
-                      <button class="btn btn-success" role="button" href="#">
-                        More Info
-                      </button>
-                    </form>
-                  </div>
-              </div>
-              </div>
-            </div>
-          `;
-    }
-  }
-
-  return output;
-};
-
 // We do some fetch request.
 fetch(`../json/movie-data.json`)
   .then((response) => {
@@ -119,13 +66,6 @@ fetch(`../json/movie-data.json`)
   .then((data) => {
     let desiredObject = data[movie_id];
     let genres = desiredObject.Actors.split(",");
-    // let director = desiredObject.Director;
-    // let writers = desiredObject.Writer.split(",");
-    // console.log(genres);
-    // console.log(director);
-    // console.log(writers);
-    console.log(desiredObject);
-
     let similarMovies = [];
     for (let i = 0; i < data.length; i++) {
       let genresOf = data[i].Actors.split(",");
@@ -140,8 +80,6 @@ fetch(`../json/movie-data.json`)
           });
       }
     }
-    // Found similar movies lol.
-    console.log(similarMovies);
     let outputVariable = "";
     if (similarMovies.length > 0) {
       outputVariable = addRelatedMovied(similarMovies);
@@ -149,7 +87,6 @@ fetch(`../json/movie-data.json`)
       outputVariable += '<p class="text-muted">No related movies<p>';
     }
 
-    // console.log("output variable equals:", outputVariable);
     let output = "";
     let comments = "";
     let rating;
@@ -270,7 +207,9 @@ fetch(`../json/movie-data.json`)
     output += `
             <div class="unique-movie-size">
               <div class="well text-center">
-                <img class="img-poster" src="${desiredObject.Poster}">
+                <div class="responsive-image">
+                  <img src="${desiredObject.Poster}">
+                </div>
                 <h5 style="color:yellow;">${desiredObject.Title}</h5>
                   <div style="color:yellow; class="card card-body">
                     <p>${desiredObject.Plot}<p>

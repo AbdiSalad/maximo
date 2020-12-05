@@ -1,84 +1,50 @@
-<!DOCTYPE html>
-<html lang="en" dir="ltr">
-  <head>
-    <!-- Bootstrap Css Framework-->
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
-    <link rel="stylesheet" href="../css/styles.css">
-    <link rel="stylesheet" href="../css/register.css">
-    <link rel="stylesheet" href="../css/media.css">
-    <link rel="stylesheet" href="../css/movies.css">
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <title>Maximo</title>
-    <link href="./" rel="icon">
-
-  </head>
-  <body>
-    <!-- <canvas id="space"></canvas> -->
-
-    <div class="content container-lg no-padding-sides">
-      <header class="middle tweek">
-        <nav class="nav d-flex flex-row  tweek justify-content-between">
-          <div>
-            <button class="custom-btn btn-3 logo-button" id="maximo-button" ><span>Maximo</span></button>
-          </div>
-          <div>
-            <a href="/Login" class="btn btn-success">Login</a>
-          </div>
-        </nav>
-      </header>
+<div class="content container-lg no-padding-sides">
+  <header class="middle tweek">
+    <nav class="nav d-flex flex-row  tweek justify-content-between">
+      <div>
+        <button class="custom-btn btn-3 logo-button" id="maximo-button" ><span>Maximo</span></button>
+      </div>
+      <div>
+        <a href="/Login" class="btn btn-success">Login</a>
+      </div>
+    </nav>
+  </header>
 
 
-      <div class="container register">
-        <div class="row align-items-center">
-          <div class="col-sm my-3 white">
-            <h1>Don't miss out on awesome movie reviews.</h1>
-            <p class="text-muted lead">Sign up today!</p>
-          </div>
-          <div class="col-sm my-3 white">
-              <h3>Get started with a free account</h3>
-              <p class="text-muted">
-                Create a Maximo account to get the latest movie reviews
-                out there today. Don't miss on this limited time offer. Already have
-                an account? <a href="../index.html">Log in here</a>
-              </p>
-              <form action="/Register" method="POST">
-                <div class="form-group">
-                  <label for="email">Email</label>
-                  <input type="email" id="email" name="email" class="form-control" value = "" required>
-                </div>
-                <div class="form-group">
-                  <label for="username">Username</label>
-                  <input type="text" id="username" name="username" class="form-control" value = "" required>
-                </div>
-                <div class="form-group">
-                  <label for="password">Password</label>
-                  <input type="password" id="password" name="password" class="form-control" value = "" required>
-                </div>
-                <button type="submit" class="btn btn-primary">Submit</button>
-              </form>
+  <div class="container register">
+    <div class="row align-items-center">
+      <div class="col-sm my-3 white">
+        <h1>Don't miss out on awesome movie reviews.</h1>
+        <p class="text-muted lead">Sign up today!</p>
+      </div>
+      <div class="col-sm my-3 white">
+          <h3>Get started with a free account</h3>
+          <p class="text-muted">
+            Create a Maximo account to get the latest movie reviews
+            out there today. Don't miss on this limited time offer. Already have
+            an account? <a href="../index.html">Log in here</a>
+          </p>
+          <form action="/Register" method="POST">
+            <div class="form-group">
+              <label for="email">Email</label>
+              <input type="email" id="email" name="email" class="form-control" value = "" required>
             </div>
-          </div>
+            <div class="form-group">
+              <label for="username">Username</label>
+              <input type="text" id="username" name="username" class="form-control" value = "" required>
+            </div>
+            <div class="form-group">
+              <label for="password">Password</label>
+              <input type="password" id="password" name="password" class="form-control" value = "" required>
+            </div>
+            <button type="submit" class="btn btn-primary">Submit</button>
+          </form>
         </div>
       </div>
     </div>
+</div>
 
 
 
 
 
-
-
-
-
-    <!-- Jquery & PopperJs -->
-    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
-
-    <!-- BootStrap JavaScript -->
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js" integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV" crossorigin="anonymous"></script>
-
-    <script src="../js/movie-search.js"></script>
-  </body>
-
-</html>

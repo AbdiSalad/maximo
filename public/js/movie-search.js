@@ -6,6 +6,8 @@ button.onclick = function() {
   location.assign('/Login');
 }
 
+
+
 // These functions just change the dropdowns text.
 const changeToTitle = () => {
   $("#dropdown-button").text("Title");
@@ -43,3 +45,4 @@ const changeToUsers = () => {
 const changeToHome = () => {
   frm.action = "/Login";
 }
+

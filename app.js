@@ -1,4 +1,4 @@
-const PORT = 9000;
+const PORT = 3000;
 const express = require("express");
 const fs = require("fs");
 const cors = require("cors");
@@ -239,7 +239,6 @@ app
     res.render("sign-up");
   })
   .post(urlencodedParser, (req, res) => {
-    console.log(req.body);
     insertUser(req, res);
   });
 
@@ -436,7 +435,6 @@ app
     if (userOnline == null) {
       res.redirect("/Login");
     } else {
-      // console.log(userOnline);
       // lets find the users more liked genre
       let favouriteGenre;
       if (userOnline.genreLiked.length === 0) {

@@ -55,10 +55,10 @@
 
   <div class="row text-center">
     <div class="col-lg-4">
-      <div class="creative-card bg-primary text-white middle">
+      <div class="creative-card bg-primary text-white">
         <h2>Followed</h2>
 
-        <ul class="list-group middle">
+        <ul class="list-group">
           <% for (var i=0; i < foundUser.following.length; i++) { %>
           <form action="/users" id="my_form">
             <input
@@ -77,7 +77,7 @@
     </div>
 
     <div class="col-lg-4">
-      <div class="creative-card bg-primary text-white middle">
+      <div class="creative-card bg-primary text-white">
         <h4>Movie Ratings</h4>
 
             <!-- Here we loop over the movie ratings made by this user. -->
@@ -96,9 +96,9 @@
 
 
                 <div class="  bg-light  text-center">
-                  <button type="submit" id="search-link">Movie title: <%=foundUser.ratings[i].title%></button>
+                  <button class="good-looking" type="submit" id="search-link">Movie title: <%=foundUser.ratings[i].title%></button>
                   <br>
-                  <div class="row justify-content-center">
+                  <div class="row justify-content-center search-link">
                     <img src="/images/star.png" width="25" height="25" />
                     <p class="text-muted colour"> &nbsp;<%=foundUser.ratings[i].rating%> / 5</p>
                   </div>
@@ -113,7 +113,7 @@
       </div>
     </div>
     <div class="col-lg-4">
-      <div class="creative-card bg-primary text-white middle">
+      <div class="creative-card bg-primary text-white">
         <h4>Movie comments</h4>
 
             <!-- Here we loop over the movie comments made by this user. -->
@@ -131,9 +131,9 @@
                 />
 
 
-                <div class="bg-light">
+                <div class="bg-light search-link">
 
-                  <button type="submit" class="search-link">Movie title: <%=foundUser.comments[i].title%></button>
+                  <button class="good-looking" type="submit" class="search-link">Movie title: <%=foundUser.comments[i].title%></button>
                   <p class="text-muted"> &nbsp;&nbsp;<%=foundUser.comments[i].comment%></p>
                 </div>
 

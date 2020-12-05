@@ -6,20 +6,18 @@ const findMostWorkedWith = (dataObject, nameValue) => {
 
   let workedWith = [];
   for (let i = 0; i < dataObject.length; i++) {
-    let director = dataObject[i].Director.split(",")
-    let actors = dataObject[i].Actors.split(",");
-
-
     if (director.includes(nameValue) || actors.includes(nameValue)) {
-      console.log(director)
-          console.log(actors)
+      
+      let director = dataObject[i].Director.split(",")
+      let actors = dataObject[i].Actors.split(",");
+      
       for (let j = 0; j < director.length; j++) { 
-        if (director[j] != nameValue) { 
+        if (!director[j].includes(nameValue)) { 
           workedWith.push(director[j])
         }
       }
       for (let z = 0; z < actors.length; z++) { 
-        if (actors[z] != nameValue) { 
+        if (!actors[z].includes(nameValue)) { 
           workedWith.push(actors[z])
         }
       }
@@ -38,7 +36,6 @@ const findMostWorkedWith = (dataObject, nameValue) => {
                       ></input>
                     <button class="good-looking" type="submit">${workedWith[i]}</button>
                   </form>`
-      // output += "<li>" + workedWith[i] + "</li>";
     }
   } else {
     // let's break it down. then.
@@ -66,7 +63,6 @@ fetch(`../json/movie-data.json`)
     return response.json();
   })
   .then((data) => {
-    console.log(data);
     let output = findMostWorkedWith(data, nameValue);
 
     $("#people-worked").html(output);

@@ -16,14 +16,15 @@ function getMovies(searchText){
     })
     .then((data) => {
       let movies = data.Search;
-      console.log(movies);
       let output = '';
 
       $.each(movies, (index, movie) => {
         output += `
           <div class="col-md-3">
             <div class="well text-center">
-              <img class="img-poster" src="${movie.Poster}">
+              <div class="responsive-image">
+                <img src="${movie.Poster}">
+              </div>
               <h5 style="color:yellow;>${movie.Title}</h5>
               <a onclick="movieSelected('${movie.imdbID}')" class="btn btn-primary" href='#'>Movie Details</a>
             </div>

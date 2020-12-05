@@ -31,14 +31,15 @@ const titleOutput = (dataObject, searchValue) => {
   // We return stuff;
   //   return "<h1>My name is jeff<h1>";
   for (let i = 0; i < dataObject.length; i++) {
-    let averageRating = getAverageRating(dataObject[i]);
+    let averageRating = Math.round(getAverageRating(dataObject[i]));
 
     if (dataObject[i].Title.toUpperCase().includes(searchValue.toUpperCase())) {
-      console.log(dataObject[i]);
       output += `
             <div class="col-md-3">
               <div class="well text-center">
-                <img class="img-poster" src="${dataObject[i].Poster}">
+                <div class="responsive-image">
+                  <img src="${dataObject[i].Poster}">
+                </div>
                 <h5 style="color:yellow;">${dataObject[i].Title}</h5>
                 <a data-toggle="collapse" href="#collapseExample${i}" class="btn btn-primary" role="button" aria-expanded="false" aria-controls="collapseExample">
                   Movie Details
@@ -73,11 +74,12 @@ const genreOutput = (dataObject, searchValue) => {
   for (let i = 0; i < dataObject.length; i++) {
     let averageRating = getAverageRating(dataObject[i]);
     if (dataObject[i].Genre.toUpperCase().includes(searchValue.toUpperCase())) {
-      console.log(dataObject[i]);
       output += `
             <div class="col-md-3">
               <div class="well text-center">
-                <img src="${dataObject[i].Poster}">
+                <div class="responsive-image">
+                  <img src="${dataObject[i].Poster}">
+                </div>
                 <h5 style="color:yellow;">${dataObject[i].Title}</h5>
                 <a data-toggle="collapse" href="#collapseExample${i}" class="btn btn-primary" role="button" aria-expanded="false" aria-controls="collapseExample">
                   Movie Details
@@ -112,11 +114,12 @@ const yearOutput = (dataObject, searchValue) => {
   for (let i = 0; i < dataObject.length; i++) {
     let averageRating = getAverageRating(dataObject[i]);
     if (dataObject[i].Year == searchValue) {
-      console.log(dataObject[i]);
       output += `
             <div class="col-md-3">
               <div class="well text-center">
-                <img src="${dataObject[i].Poster}">
+                <div class="responsive-image">
+                  <img src="${dataObject[i].Poster}">
+                </div>
                 <h5 style="color:yellow;">${dataObject[i].Title}</h5>
                 <a data-toggle="collapse" href="#collapseExample${i}" class="btn btn-primary" role="button" aria-expanded="false" aria-controls="collapseExample">
                   Movie Details
@@ -152,11 +155,13 @@ const minRatingOutput = (dataObject, searchValue) => {
     let averageRating = getAverageRating(dataObject[i]);
 
     if (averageRating == searchValue) {
-      console.log(dataObject[i]);
       output += `
             <div class="col-md-3">
               <div class="well text-center">
-                <img src="${dataObject[i].Poster}">
+                <div class="responsive-image">
+                  <img src="${dataObject[i].Poster}">
+                </div>
+
                 <h5 style="color:yellow;">${dataObject[i].Title}</h5>
                 <a data-toggle="collapse" href="#collapseExample${i}" class="btn btn-primary" role="button" aria-expanded="false" aria-controls="collapseExample">
                   Movie Details
@@ -195,7 +200,6 @@ if (searchValue == "") {
       return response.json();
     })
     .then((data) => {
-      console.log(data);
       let output = "";
 
       if (texterValue === "Title") {
@@ -213,14 +217,4 @@ if (searchValue == "") {
     .catch((err) => {
       console.log(err);
     });
-
-  //   if (texterValue === "Title") {
-  //     $("#movies").html("<h1>This is going to be based off title</h1>");
-  //   } else if (texterValue === "Genre") {
-  //     $("#movies").html("<h1>This is going to be based off Genre</h1>");
-  //   } else if (texterValue === "Year") {
-  //     $("#movies").html("<h1>This is going to be based off Year</h1>");
-  //   } else {
-  //     $("#movies").html("<h1>This is going to be based off MinRating</h1>");
-  //   }
 }
