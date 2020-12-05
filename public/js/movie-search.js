@@ -46,3 +46,8 @@ const changeToHome = () => {
   frm.action = "/Login";
 }
 
+const changeToUniqueUser = () => { 
+  $("#dropdown-button").text("User by iD");
+  $("#texter").val("User");
+  frm.action = "/users/:";
+}

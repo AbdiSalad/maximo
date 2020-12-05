@@ -416,15 +416,21 @@ app
         userOnline.save();
         userOnline = userOnline;
       }
-      const usernameUpper = req.query.search.toUpperCase();
 
-      if (usernameUpper === userOnline.username.toUpperCase()) {
+      if (req.query.search == null) {
+        res.redirect('/Profile')
+      } else { 
+              const usernameUpper = req.query.search.toUpperCase();
+      
+      
+
+      if (req.query.search.toUpperCase() === userOnline.username.toUpperCase()) {
         res.redirect("/Profile");
       } else {
         User.find({}, (err, users) => {
           let bool = false;
           for (let i = 0; i < users.length; i++) {
-            if (users[i].username.toUpperCase() === usernameUpper) {
+            if (users[i].username.toUpperCase() === req.query.search.toUpperCase()) {
               userSearched = users[i];
               bool = true;
               if (userOnline.following.includes(users[i].username)) {
@@ -447,6 +453,8 @@ app
           }
         });
       }
+      }
+
     } else {
       res.redirect("/Login");
     }
@@ -454,6 +462,12 @@ app
   .post(urlencodedParser, (req, res) => {
     if (req.body.follow === "follow") {
       userSearched.followers.push(userOnline.username);
+      userSearched.notifications.push(
+        {
+          message: `You have just been followed by ${userOnline.username}`,
+          username: `${userOnline.username}`
+        }
+      )
       userOnline.following.push(userSearched.username);
     } else {
       let index = userSearched.followers.indexOf(userOnline.username);
@@ -468,6 +482,32 @@ app
     res.redirect("/Profile");
   });
 
+
+
+app
+  .route('/users/:')
+  .get((req, res) => { 
+
+    if (userOnline == null) {
+      res.redirect('/Login')
+    } else { 
+      let userId = req.query.search;
+    
+      User.findOne({ _id: req.query.search }, (err, data) => { 
+        if (err) {
+          res.redirect('/Profile')
+        } else { 
+
+          res.render('real-user-view', {
+            userOnline: userOnline,
+            user: data,
+          })
+        }
+
+      })
+      }
+
+  })
 // PROFILE ROUTE
 app
   .route("/Profile")

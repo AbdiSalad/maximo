@@ -1,7 +1,7 @@
 /***  THIS FILE IS FOR MEDIA QUERIES ONLY ***/
 
 /* Extra small devices (portrait phones, less than 576px) */
-@media (min-width: 100px) and (max-width: 300px) {
+@media (min-width: 100px) and (max-width: 400px) {
   .navbar-inverse {
     justify-content: center;
   }
@@ -31,7 +31,7 @@
     margin: 0 auto;
   }
 
-  h1, h2, h3, h4, h5, h6, p, a {
+  h1, h2, h3, h4, h5, h6, p, a{
     font-size: 1rem;
   } 
   .add-person-card {
