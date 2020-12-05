@@ -152,6 +152,14 @@ let personSearched = null;
 
 // People stuff. Populating it.
 let people = [];
+// get people from the people.json file
+const peopleData = fs.readFileSync("./public/json/people.json");
+let peopleDataReal = JSON.parse(peopleData)
+
+for (let i = 0; i < peopleDataReal.length; i++) { 
+  people.push(peopleDataReal[i])
+}
+
 const data = fs.readFileSync("./public/json/movie-data.json");
 let movies = JSON.parse(data);
 for (let i = 0; i < movies.length; i++) {
@@ -171,6 +179,8 @@ for (let i = 0; i < movies.length; i++) {
     }
   }
 }
+
+
 
 // Create application/x-www-form-urlencoded parser
 const urlencodedParser = bodyParser.urlencoded({ extended: false });
@@ -330,29 +340,59 @@ app.route("/movies/:").get((req, res) => {
 app
   .route("/People")
   .get((req, res) => {
+
     if (userOnline != null) {
-      if (!people.includes(req.query.search)) {
-        res.redirect("/Profile");
-      } else {
-        let index = people.indexOf(req.query.search);
-        personSearched = req.query.search;
-        if (userOnline.peopleFollowing.includes(req.query.search)) {
-          res.render("person", {
-            follow: "unfollow",
-            username: userOnline.username,
-            name: req.query.search,
-          });
-        } else {
-          res.render("person", {
+      let bool = false;
+      for (let i = 0; i < people.length; i++) { 
+        if (people[i].toUpperCase() == req.query.search.toUpperCase()) { 
+          bool = true;
+          personSearched = people[i];
+          if (userOnline.peopleFollowing.includes(personSearched)) {
+            res.render("person", {
+              follow: "unfollow",
+              username: userOnline.username,
+              name: personSearched,
+            });
+          } else { 
+                      res.render("person", {
             follow: "follow",
             username: userOnline.username,
-            name: req.query.search,
+            name: personSearched,
           });
+          }
         }
       }
-    } else {
+
+      if (!bool) { 
+        res.redirect("/Profile");
+      }
+    } else { 
       res.redirect("/Login");
     }
+
+    // if (userOnline != null) {
+    //   if (!people.includes(req.query.search)) {
+    //     res.redirect("/Profile");
+    //   } else {
+    //     let index = people.indexOf(req.query.search);
+    //     personSearched = req.query.search;
+    //     if (userOnline.peopleFollowing.includes(req.query.search)) {
+    //       res.render("person", {
+    //         follow: "unfollow",
+    //         username: userOnline.username,
+    //         name: req.query.search,
+    //       });
+    //     } else {
+    //       res.render("person", {
+    //         follow: "follow",
+    //         username: userOnline.username,
+    //         name: req.query.search,
+    //       });
+    //     }
+    //   }
+    // } else {
+    //   res.redirect("/Login");
+    // }
   })
   .post(urlencodedParser, (req, res) => {
     if (req.body.follow === "follow") {
@@ -510,8 +550,22 @@ app
   .post(urlencodedParser, (req, res) => {
     if (!people.includes(req.body.name)) {
       people.push(req.body.name);
+
+      // lets add the person to the json file as well.
+      peopleDataReal.push(req.body.name);
+
+      fs.writeFile(
+        "./public/json/people.json",
+        JSON.stringify(peopleDataReal, null, 2),
+        finished
+      );
+      res.redirect("/Profile");
+      
+      function finished(err) { }
+    } else { 
+      res.redirect("/Profile");
     }
-    res.redirect("/Profile");
+    
   });
 
 app.route("/add-comment").post(urlencodedParser, (req, res) => {
