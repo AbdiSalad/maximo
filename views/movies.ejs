@@ -1,22 +1,11 @@
 <div class="container">
-
-<!-- This is the nav -->
+  <!-- This is the nav -->
   <ul class="navbar transparent navbar-inverse">
     <li class="navbar transparent navbar-inverse">
-      <a style="color: white;" href="/Profile">User: <%=userOnline.username%></a>
+      <a style="color: white" href="/Profile">User: <%=userOnline.username%></a>
     </li>
 
     <div class="d-flex flex-row align-items-center">
-      <form action="/Profile" method="POST">
-        <input
-          style="display: none"
-          type="text"
-          name="contributing_user"
-          value="contributing_user"
-        />
-        <button type="submit" class="btn btn-success">Contribute</button>
-      </form>
-
       <li class="nav-item">
         <a class="nav-link" href="/Logout">Logout</a>
       </li>
@@ -34,6 +23,6 @@
       <!-- Output will be populated over here depending on differen't stuff -->
     </div>
   </div>
-  
+
   <script src="/js/client.js"></script>
 </div>

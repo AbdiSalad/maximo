@@ -327,10 +327,17 @@ app
 app.route("/movies/:").get((req, res) => {
   if (userOnline != null) {
     // now lets find the users most liked movie genre
-    res.render("unique-movie", {
-      userOnline: userOnline,
-      movie_id: req.query.movie_id,
-    });
+    if (userOnline.contributing_user) {
+      res.render("unique-movie", {
+        userOnline: userOnline,
+        movie_id: req.query.movie_id,
+      });
+    } else {
+      res.render("unique-movie-beta", {
+        userOnline: userOnline,
+        movie_id: req.query.movie_id,
+      });
+    }
   } else {
     res.redirect("/Login");
   }
